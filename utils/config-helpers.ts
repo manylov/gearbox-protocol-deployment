@@ -21,7 +21,6 @@ export const getContractsPathsFromDeps = (depsPath: string): string[] => {
   const pathToContracts = path.resolve(process.cwd(), "node_modules", depsPath);
   const excludeDir = "test";
   const files = getAllSolFiles(pathToContracts, excludeDir);
-  console.log(files);
   return files;
 };
 
