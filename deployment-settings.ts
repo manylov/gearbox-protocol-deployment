@@ -6,6 +6,7 @@ export type POOL_DEPLOYMENT_PARAMS = {
   tag: string;
   interestRateModel: {
     contract: string;
+    // todo add generic to strictly define options type depended on model type
     options: any[];
   };
   pool: {

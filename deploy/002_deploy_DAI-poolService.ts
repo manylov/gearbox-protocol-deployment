@@ -1,4 +1,3 @@
-import { underlyingToken } from "./../utils/deps";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
 import { getPoolSettings } from "../utils/get-pool-settings";
@@ -33,6 +32,12 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     ],
     log: true,
   });
+
+  const contract = await hre.ethers.getContract(`${pool}.${poolContract}`);
+  // @ts-ignore
+  const dToken = await contract.dieselToken();
+
+  console.log("Diesel Token deployed:", dToken);
 };
 export default func;
 func.tags = ["PoolService"];
