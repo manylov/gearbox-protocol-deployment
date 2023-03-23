@@ -1,18 +1,18 @@
 import { contractsByNetwork, tokenDataByNetwork } from "@gearbox-protocol/sdk";
 
 export const addressProvider = "0xcF64698AFF7E5f27A11dff868AF228653ba53be0";
+export const degenNFT = "0xB829a5b349b01fc71aFE46E50dD6Ec0222A6E599";
 
 export type POOL_DEPLOYMENT_PARAMS = {
   tag: string;
   interestRateModel: {
     contract: string;
-    // todo add generic to strictly define options type depended on model type
+    // todo add generic to strictly define options types depended on rateModel type
     options: any[];
   };
   pool: {
-    contract: string;
     underlyingToken: string;
-    expectedLiquidityLimit: bigint;
+    expectedLiquidityLimit: string;
   };
 };
 
@@ -32,9 +32,8 @@ export const DEPLOYMENT_SETTINGS: DEPLOYMENT_SETTINGS = {
       options: [8500, 0, 200, 10000],
     },
     pool: {
-      contract: "PoolService",
       underlyingToken: tokenDataByNetwork.Mainnet.DAI,
-      expectedLiquidityLimit: BigInt("10000000"),
+      expectedLiquidityLimit: "10000000",
     },
   },
 };
