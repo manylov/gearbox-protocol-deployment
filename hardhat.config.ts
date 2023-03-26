@@ -1,10 +1,13 @@
 import "dotenv/config";
-import { HardhatUserConfig, types } from "hardhat/config";
-import "@nomicfoundation/hardhat-toolbox";
+import { HardhatUserConfig, types, task } from "hardhat/config";
 import { getContractsPathsFromDeps, node_url } from "./utils/config-helpers";
 import "hardhat-dependency-compiler";
+import "dotenv/config";
 import "hardhat-deploy";
-import { task } from "hardhat/config";
+import "@nomiclabs/hardhat-ethers";
+import "hardhat-deploy-ethers";
+import "hardhat-gas-reporter";
+import "@typechain/hardhat";
 
 task("new-pool", "Deploy new pool")
   .addParam("pool", "Pool id from deployment-settings.ts", "", types.string)
@@ -31,7 +34,14 @@ const config: HardhatUserConfig = {
     deployer: 0,
   },
   dependencyCompiler: {
-    paths: getContractsPathsFromDeps("@gearbox-protocol/core-v2/contracts/"),
+    // paths: getContractsPathsFromDeps("@gearbox-protocol/core-v2/contracts/"),
+    paths: [
+      ...getContractsPathsFromDeps(
+        "@gearbox-protocol/integrations-v2/contracts/"
+      ),
+      ...getContractsPathsFromDeps("@gearbox-protocol/core-v2/contracts/"),
+    ],
+    // keep: true,
   },
   networks: {
     hardhat: {

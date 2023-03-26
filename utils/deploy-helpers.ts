@@ -2,6 +2,7 @@ import { DEPLOYMENT_SETTINGS } from "../deployment-settings";
 
 export const getPoolSettings = () => {
   const pool = process.argv[4];
+
   const deploySettings = DEPLOYMENT_SETTINGS[pool];
   if (!deploySettings)
     throw new Error(
@@ -9,4 +10,11 @@ export const getPoolSettings = () => {
     );
 
   return deploySettings;
+};
+
+export type CHAIN = "Mainnet" | "Goerli";
+
+export const getChain = () => {
+  if (process.env.CHAIN === "MAINNET") return "Mainnet";
+  return "Goerli";
 };
