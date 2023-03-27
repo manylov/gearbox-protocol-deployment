@@ -1,16 +1,16 @@
-import { PoolService } from "@gearbox-protocol/sdk";
+import { NetworkType, PoolService } from "@gearbox-protocol/sdk";
 import { PoolFactory } from "./../typechain-types/@gearbox-protocol/core-v2/contracts/factories/PoolFactory";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
-import { getPoolSettings } from "../utils/deploy-helpers";
+import { getChain, getPoolSettings } from "../utils/deploy-helpers";
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployments, getNamedAccounts } = hre;
   const { deploy } = deployments;
 
   const { deployer } = await getNamedAccounts();
-
-  const deploySettings = getPoolSettings();
+  const chain = await getChain(hre);
+  const deploySettings = getPoolSettings(chain);
   const poolId = deploySettings.poolId;
   const contract = "PoolFactory";
   const options = deploySettings.poolOpts;

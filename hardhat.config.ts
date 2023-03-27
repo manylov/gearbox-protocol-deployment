@@ -30,7 +30,6 @@ const config: HardhatUserConfig = {
     sources: "contracts",
   },
   namedAccounts: {
-    // todo calculate deployer address from PK in .env
     deployer: 0,
   },
   dependencyCompiler: {
@@ -45,12 +44,34 @@ const config: HardhatUserConfig = {
   },
   networks: {
     hardhat: {
-      forking: process.env.HARDHAT_FORK
-        ? {
-            enabled: true,
-            url: node_url(process.env.HARDHAT_FORK),
-          }
-        : undefined,
+      forking: {
+        enabled: true,
+        url: node_url(process.env.FORK_CHAIN!),
+      },
+      // accounts: {
+      //   mnemonic: process.env.MNEMONIC,
+      //   path: "m/44'/60'/0'/0",
+      //   initialIndex: 0,
+      //   count: 10,
+      // },
+    },
+    mainnet: {
+      url: process.env.MAINNET_NODE_URI,
+      accounts: {
+        mnemonic: process.env.MNEMONIC,
+        path: "m/44'/60'/0'/0",
+        initialIndex: 0,
+        count: 10,
+      },
+    },
+    goerli: {
+      url: process.env.GOERLI_NODE_URI,
+      accounts: {
+        mnemonic: process.env.MNEMONIC,
+        path: "m/44'/60'/0'/0",
+        initialIndex: 0,
+        count: 10,
+      },
     },
   },
 };

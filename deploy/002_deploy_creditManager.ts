@@ -1,15 +1,17 @@
-import { CreditManagerFactory } from "./../typechain-types/@gearbox-protocol/integrations-v2/contracts/factories/CreditManagerFactory";
+import { CreditManagerFactory } from "../typechain-types/@gearbox-protocol/integrations-v2/contracts/factories/CreditManagerFactory";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
-import { getPoolSettings } from "../utils/deploy-helpers";
+import { getChain, getPoolSettings } from "../utils/deploy-helpers";
 import { PoolFactory } from "../typechain-types";
+import { NetworkType } from "@gearbox-protocol/sdk";
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployments, getNamedAccounts } = hre;
   const { deploy } = deployments;
   const { deployer } = await getNamedAccounts();
 
-  const deploySettings = getPoolSettings();
+  const chain = await getChain(hre);
+  const deploySettings = getPoolSettings(chain);
   const poolId = deploySettings.poolId;
 
   const contract = "CreditManagerFactory";

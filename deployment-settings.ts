@@ -1,90 +1,68 @@
-import {
-  contractsByNetwork,
-  SupportedToken,
-  tokenDataByNetwork,
-} from "@gearbox-protocol/sdk";
+import { WAD } from "@gearbox-protocol/sdk";
+import { PoolsConfigSettings } from "./utils/deploy-helpers";
 
-export const getChain = () => {
-  if (process.env.CHAIN === "MAINNET") return "Mainnet";
-  return "Goerli";
-};
-
-export const addressProvider = "0xcF64698AFF7E5f27A11dff868AF228653ba53be0";
-export const degenNFT = "0xB829a5b349b01fc71aFE46E50dD6Ec0222A6E599";
-
-export type PoolOpts = {
-  addressProvider: string;
-  underlying: string;
-  U_optimal: number;
-  R_base: number;
-  R_slope1: number;
-  R_slope2: number;
-  expectedLiquidityLimit: string;
-  withdrawFee: number;
-};
-
-export type CollateralToken = {
-  token: string;
-  liquidationThreshold: number;
-};
-
-export type CreditManagerOpts = {
-  minBorrowedAmount: string;
-  maxBorrowedAmount: string;
-  collateralTokens: CollateralToken[];
-  degenNFT: string;
-  expirable: boolean;
-};
-
-export type POOL_DEPLOYMENT_PARAMS = {
-  poolId: string;
-  poolOpts: PoolOpts;
-  creditManager: {
-    creditManagerOpts: CreditManagerOpts;
-    salt: number;
-  };
-  creditFacade: {
-    expirable: boolean;
-  };
-};
-
-export type DEPLOYMENT_SETTINGS = Record<string, POOL_DEPLOYMENT_PARAMS>;
-
-const getTokenAddressFromSdkByName = (token: SupportedToken): string => {
-  return tokenDataByNetwork[getChain()][token];
-};
-
-export const DEPLOYMENT_SETTINGS: DEPLOYMENT_SETTINGS = {
+export const poolsSettings: PoolsConfigSettings = {
   DAI: {
-    poolId: "DAI",
-    poolOpts: {
-      addressProvider,
+    poolConfig: {
       U_optimal: 8500,
       R_base: 0,
       R_slope1: 200,
       R_slope2: 10000,
-      underlying: getTokenAddressFromSdkByName("DAI"),
-      expectedLiquidityLimit: "10000000",
+      underlying: "DAI",
+      expectedLiquidityLimit: WAD.mul(150000),
       withdrawFee: 1000,
     },
-    creditManager: {
-      creditManagerOpts: {
-        minBorrowedAmount: "1000000",
-        maxBorrowedAmount: "1000000",
-        collateralTokens: [
-          // {
-          //   token: getTokenAddressFromSdkByName("USDT"),
-          //   liquidationThreshold: 1000,
-          // },
-        ],
-        degenNFT,
-        expirable: true,
-      },
-      salt: 123,
-    },
+    creditManagerConfig: {
+      minBorrowedAmount: WAD.mul(150000),
+      maxBorrowedAmount: WAD.mul(1000000),
+      collateralTokens: [
+        { symbol: "WETH", liquidationThreshold: 85 },
+        { symbol: "STETH", liquidationThreshold: 82.5 },
+        { symbol: "WBTC", liquidationThreshold: 85 },
 
-    creditFacade: {
-      expirable: true,
+        { symbol: "USDC", liquidationThreshold: 92 },
+        { symbol: "USDT", liquidationThreshold: 90 },
+        { symbol: "sUSD", liquidationThreshold: 90 },
+        { symbol: "FRAX", liquidationThreshold: 90 },
+        { symbol: "GUSD", liquidationThreshold: 90 },
+        { symbol: "LUSD", liquidationThreshold: 90 },
+
+        { symbol: "steCRV", liquidationThreshold: 82.5 },
+        { symbol: "cvxsteCRV", liquidationThreshold: 82.5 },
+
+        { symbol: "3Crv", liquidationThreshold: 90 },
+        { symbol: "cvx3Crv", liquidationThreshold: 90 },
+
+        { symbol: "FRAX3CRV", liquidationThreshold: 90 },
+        { symbol: "cvxFRAX3CRV", liquidationThreshold: 90 },
+
+        { symbol: "LUSD3CRV", liquidationThreshold: 90 },
+        { symbol: "cvxLUSD3CRV", liquidationThreshold: 90 },
+
+        { symbol: "crvPlain3andSUSD", liquidationThreshold: 90 },
+        { symbol: "cvxcrvPlain3andSUSD", liquidationThreshold: 90 },
+
+        { symbol: "gusd3CRV", liquidationThreshold: 90 },
+        { symbol: "cvxgusd3CRV", liquidationThreshold: 90 },
+
+        { symbol: "crvFRAX", liquidationThreshold: 90 },
+        { symbol: "cvxcrvFRAX", liquidationThreshold: 90 },
+
+        { symbol: "yvDAI", liquidationThreshold: 90 },
+        { symbol: "yvUSDC", liquidationThreshold: 90 },
+        { symbol: "yvWETH", liquidationThreshold: 82.5 },
+        { symbol: "yvWBTC", liquidationThreshold: 82.5 },
+        { symbol: "yvCurve_stETH", liquidationThreshold: 82.5 },
+        { symbol: "yvCurve_FRAX", liquidationThreshold: 90 },
+
+        { symbol: "CVX", liquidationThreshold: 25 },
+        { symbol: "FXS", liquidationThreshold: 25 },
+        { symbol: "LQTY", liquidationThreshold: 0 },
+        { symbol: "CRV", liquidationThreshold: 25 },
+        { symbol: "LDO", liquidationThreshold: 0 },
+        { symbol: "SNX", liquidationThreshold: 25 },
+      ],
+      salt: 123,
     },
   },
 };
