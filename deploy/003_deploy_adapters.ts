@@ -118,7 +118,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
           const lp_token =
             tokenDataByNetwork[chain][contractParamsData.lpToken];
 
-          const metapoolBase = hre.ethers.constants.AddressZero; // what is metapoolBase?
+          const metapoolBase = hre.ethers.constants.AddressZero; 
 
           const result = await deploy(`${poolId}.${adapterName}`, {
             contract: adapterName,
