@@ -10,7 +10,7 @@ import { poolsSettings } from "../deployment-settings";
 
 export const getPoolSettings = (chainId: NetworkType) => {
   const pool = process.argv[4];
-  const deploySettings = getSettingsForChain(chainId)[pool]; // DEPLOYMENT_SETTINGS[pool];
+  const deploySettings = getSettingsForChain(chainId)[pool]; 
   if (!deploySettings)
     throw new Error(
       `Pool with id ${pool} is not found in deployment-settings.ts`
