@@ -118,7 +118,7 @@ export const getSettingsForChain = (
   const addressProvider =
     chainId === "Mainnet"
       ? "0xcF64698AFF7E5f27A11dff868AF228653ba53be0"
-      : "place goerli address provider here";
+      : "0x95f4cea53121b8A2Cb783C6BFB0915cEc44827D3";
 
   const fullSettings: DEPLOYMENT_SETTINGS = {};
 
