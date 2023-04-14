@@ -1,0 +1,41 @@
+[
+  {
+    "address": "0xB1c05b498Cb58568B2470369FEB98B00702063dA",
+    "constructorArguments": [
+      "0x95357303f995e184a7998da6c6ea35cc728a1900",
+      "0x0000000000000000000000000000000000000000",
+      "0x0000000000000000000000000000000000000000",
+      false
+    ]
+  },
+  {
+    "address": "0x3de00f44ce68FC56DB0e0E33aD4015C6e78eCB39",
+    "constructorArguments": [
+      "0x95357303f995e184a7998da6c6ea35cc728a1900",
+      "0xB1c05b498Cb58568B2470369FEB98B00702063dA",
+      {
+        "minBorrowedAmount": {
+          "type": "BigNumber",
+          "hex": "0x00"
+        },
+        "maxBorrowedAmount": {
+          "type": "BigNumber",
+          "hex": "0x00"
+        },
+        "collateralTokens": [],
+        "degenNFT": "0x0000000000000000000000000000000000000000",
+        "blacklistHelper": "0x0000000000000000000000000000000000000000",
+        "expirable": false
+      }
+    ]
+  },
+  {
+    "address": "0x89372b32b8AF3F1272e2efb3088616318D2834cA",
+    "constructorArguments": [
+      "0x5887ad4cb2352e7f01527035faa3ae0ef2ce2b9b",
+      "0x0000000000000000000000000000000000000000",
+      "0x0000000000000000000000000000000000000000",
+      false
+    ]
+  }
+]
